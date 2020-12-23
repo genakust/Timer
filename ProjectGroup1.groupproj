@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CCAE4295-C798-4E80-AF15-290AEA73F8C4}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ProjectTimer.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProjectTimer">
+        <MSBuild Projects="ProjectTimer.dproj"/>
+    </Target>
+    <Target Name="ProjectTimer:Clean">
+        <MSBuild Projects="ProjectTimer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectTimer:Make">
+        <MSBuild Projects="ProjectTimer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProjectTimer"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProjectTimer:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProjectTimer:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
