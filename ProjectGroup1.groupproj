@@ -6,6 +6,9 @@
         <Projects Include="ProjectTimer.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="ProjectTimer:Make">
         <MSBuild Projects="ProjectTimer.dproj" Targets="Make"/>
     </Target>
+    <Target Name="PlayingAudio">
+        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj"/>
+    </Target>
+    <Target Name="PlayingAudio:Clean">
+        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PlayingAudio:Make">
+        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectTimer"/>
+        <CallTarget Targets="ProjectTimer;PlayingAudio"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectTimer:Clean"/>
+        <CallTarget Targets="ProjectTimer:Clean;PlayingAudio:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectTimer:Make"/>
+        <CallTarget Targets="ProjectTimer:Make;PlayingAudio:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

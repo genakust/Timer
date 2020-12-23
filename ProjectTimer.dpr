@@ -1,5 +1,7 @@
 program ProjectTimer;
 
+{$R *.dres}
+
 uses
   System.StartUpCopy,
   FMX.Forms,
