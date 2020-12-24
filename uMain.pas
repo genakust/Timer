@@ -21,13 +21,11 @@ type
     TabControl1: TTabControl;
     tabTimer: TTabItem;
     tabSetings: TTabItem;
-    recBackground: TRectangle;
     ToolBar1: TToolBar;
     btnBack: TButton;
-    recContent: TRectangle;
-    Rectangle1: TRectangle;
-    btnAdd: TButton;
-    btnDelete: TButton;
+    StyleBook1: TStyleBook;
+    Line2: TLine;
+    Line1: TLine;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
