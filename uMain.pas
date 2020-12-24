@@ -6,21 +6,34 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani;
+  FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
+  FMX.TabControl;
 
 type
-  TForm1 = class(TForm)
-    Layout1: TLayout;
+  TfrmTimer = class(TForm)
+    layContent: TLayout;
     btnStart: TCornerButton;
     layBottom: TLayout;
     recTimer: TRectangle;
     labRestTime: TLabel;
     MediaPlayer1: TMediaPlayer;
     ColorAnimation1: TColorAnimation;
+    TabControl1: TTabControl;
+    tabTimer: TTabItem;
+    tabSetings: TTabItem;
+    recBackground: TRectangle;
+    ToolBar1: TToolBar;
+    btnBack: TButton;
+    recContent: TRectangle;
+    Rectangle1: TRectangle;
+    btnAdd: TButton;
+    btnDelete: TButton;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
+    procedure labRestTimeClick(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
   private
     FTimer1: TTimer;
     /// <summary>
@@ -34,7 +47,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmTimer: TfrmTimer;
 
 implementation
 
@@ -43,7 +56,7 @@ uses
 
 {$R *.fmx}
 
-procedure TForm1.btnStartClick(Sender: TObject);
+procedure TfrmTimer.btnStartClick(Sender: TObject);
 
 begin
   // Timer start
@@ -53,21 +66,28 @@ begin
   FCount := FTimer1.Tag;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmTimer.btnBackClick(Sender: TObject);
+begin
+  // go back
+  TabControl1.ActiveTab:= tabTimer;
+end;
+
+procedure TfrmTimer.FormCreate(Sender: TObject);
 begin
   FCount := 0;
   FTimer1 := TTimer.Create(nil);
   FTimer1.Interval := TIMER_INTERVAL;
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
+  TabControl1.ActiveTab:= tabTimer;
 end;
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TfrmTimer.FormDestroy(Sender: TObject);
 begin
   FTimer1.Free;
 end;
 
-procedure TForm1.OnTimer1(Sender: TObject);
+procedure TfrmTimer.OnTimer1(Sender: TObject);
 var
   min: integer;
   sec: extended;
@@ -79,6 +99,7 @@ begin
   begin
     FTimer1.Enabled := false;
     PlaySound();
+
   end;
 
   temp := FCount / 60;
@@ -88,7 +109,7 @@ begin
   labRestTime.Text := min.ToString + ':' + sec.ToString;
 end;
 
-procedure TForm1.PlaySound;
+procedure TfrmTimer.PlaySound;
 var
  fileName: string;
 begin
@@ -110,7 +131,7 @@ begin
   end;
 end;
 
-function TForm1.GetMediaDir: string;
+function TfrmTimer.GetMediaDir: string;
 begin
   case TOSVersion.Platform of
     TOSVersion.TPlatform.pfWindows:
@@ -124,6 +145,12 @@ begin
     TOSVersion.TPlatform.pfWinRT, TOSVersion.TPlatform.pfLinux:
       raise Exception.Create('Unexpected platform');
   end;
+end;
+
+procedure TfrmTimer.labRestTimeClick(Sender: TObject);
+begin
+  // go to the settings tab
+  TabControl1.ActiveTab:= tabSetings;
 end;
 
 initialization

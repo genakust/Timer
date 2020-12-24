@@ -6,7 +6,7 @@
         <MainSource>ProjectTimer.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Android</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>32787</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -188,7 +188,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uMain.pas">
-            <Form>Form1</Form>
+            <Form>frmTimer</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="uConstants.pas"/>

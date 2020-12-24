@@ -5,13 +5,13 @@ program ProjectTimer;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  uMain in 'uMain.pas' {Form1},
+  uMain in 'uMain.pas' {frmTimer},
   uConstants in 'uConstants.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmTimer, frmTimer);
   Application.Run;
 end.

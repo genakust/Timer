@@ -6,7 +6,7 @@
         <Projects Include="ProjectTimer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj">
+        <Projects Include="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -26,23 +26,23 @@
     <Target Name="ProjectTimer:Make">
         <MSBuild Projects="ProjectTimer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="PlayingAudio">
-        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj"/>
+    <Target Name="CubsStats">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj"/>
     </Target>
-    <Target Name="PlayingAudio:Clean">
-        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj" Targets="Clean"/>
+    <Target Name="CubsStats:Clean">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="PlayingAudio:Make">
-        <MSBuild Projects="..\..\..\..\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Mobile Snippets\PlayAudioFile\PlayingAudio.dproj" Targets="Make"/>
+    <Target Name="CubsStats:Make">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectTimer;PlayingAudio"/>
+        <CallTarget Targets="ProjectTimer;CubsStats"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectTimer:Clean;PlayingAudio:Clean"/>
+        <CallTarget Targets="ProjectTimer:Clean;CubsStats:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectTimer:Make;PlayingAudio:Make"/>
+        <CallTarget Targets="ProjectTimer:Make;CubsStats:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -1,7 +1,7 @@
-object Form1: TForm1
+object frmTimer: TfrmTimer
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Timer'
   ClientHeight = 606
   ClientWidth = 458
   FormFactor.Width = 320
@@ -10,65 +10,166 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
-  object Layout1: TLayout
+  object MediaPlayer1: TMediaPlayer
+    Left = 392
+    Top = 472
+  end
+  object TabControl1: TTabControl
     Align = Client
-    ClipParent = True
     Size.Width = 458.000000000000000000
     Size.Height = 606.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 0
-    object layBottom: TLayout
-      Align = Bottom
-      Position.Y = 556.000000000000000000
-      Size.Width = 458.000000000000000000
-      Size.Height = 50.000000000000000000
+    TabIndex = 1
+    TabOrder = 1
+    TabPosition = Dots
+    Sizes = (
+      458s
+      606s
+      458s
+      606s)
+    object tabTimer: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
+      StyleLookup = ''
       TabOrder = 0
-      object btnStart: TCornerButton
+      Text = 'tabTimer'
+      object layContent: TLayout
         Align = Client
-        StyledSettings = []
-        Sides = [Top, Left, Bottom, Right]
+        ClipParent = True
         Size.Width = 458.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 606.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Text = 'Start'
-        TextSettings.Font.Size = 28.000000000000000000
-        TextSettings.Font.StyleExt = {00060000000000000004000000}
-        TextSettings.FontColor = claDarkslategray
-        XRadius = 3.000000000000000000
-        YRadius = 3.000000000000000000
-        OnClick = btnStartClick
+        object layBottom: TLayout
+          Align = Bottom
+          Position.Y = 556.000000000000000000
+          Size.Width = 458.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object btnStart: TCornerButton
+            Align = Client
+            StyledSettings = []
+            Sides = [Top, Left, Bottom, Right]
+            Size.Width = 458.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = 'Start'
+            TextSettings.Font.Size = 28.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claDarkslategray
+            XRadius = 3.000000000000000000
+            YRadius = 3.000000000000000000
+            OnClick = btnStartClick
+          end
+        end
+        object recTimer: TRectangle
+          Align = Client
+          Fill.Color = xFF1EA0EF
+          Size.Width = 458.000000000000000000
+          Size.Height = 556.000000000000000000
+          Size.PlatformDefault = False
+          object ColorAnimation1: TColorAnimation
+            AutoReverse = True
+            Duration = 0.200000002980232200
+            StartValue = xFF1EA0EF
+            StopValue = xFFF61515
+          end
+        end
+        object labRestTime: TLabel
+          Align = Center
+          StyledSettings = [Style]
+          HitTest = True
+          Size.Width = 180.000000000000000000
+          Size.Height = 81.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 72.000000000000000000
+          TextSettings.FontColor = claAliceblue
+          TextSettings.HorzAlign = Center
+          Text = '00:00'
+          TabOrder = 2
+          OnClick = labRestTimeClick
+        end
       end
     end
-    object recTimer: TRectangle
-      Align = Client
-      Fill.Color = xFF1EA0EF
-      Size.Width = 458.000000000000000000
-      Size.Height = 556.000000000000000000
+    object tabSetings: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
-      object ColorAnimation1: TColorAnimation
-        AutoReverse = True
-        Duration = 0.200000002980232200
-        StartValue = xFF1EA0EF
-        StopValue = xFFF61515
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'tabSetings'
+      object recBackground: TRectangle
+        Align = Client
+        Fill.Color = xFF37474F
+        Size.Width = 458.000000000000000000
+        Size.Height = 566.000000000000000000
+        Size.PlatformDefault = False
+        object recContent: TRectangle
+          Align = Client
+          Fill.Color = xFF546E7A
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 448.000000000000000000
+          Size.Height = 556.000000000000000000
+          Size.PlatformDefault = False
+          object Rectangle1: TRectangle
+            Align = Top
+            Fill.Color = claWhite
+            Size.Width = 448.000000000000000000
+            Size.Height = 5.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+      end
+      object ToolBar1: TToolBar
+        Size.Width = 458.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btnBack: TButton
+          Align = Left
+          Size.Width = 80.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'arrowlefttoolbutton'
+          TabOrder = 0
+          Text = 'btnBack'
+          OnClick = btnBackClick
+        end
+        object btnAdd: TButton
+          Align = Right
+          Position.X = 298.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          TabOrder = 1
+          Text = 'btnAdd'
+        end
+        object btnDelete: TButton
+          Align = Right
+          Position.X = 378.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'trashtoolbutton'
+          TabOrder = 2
+          Text = 'btnDelete'
+        end
       end
     end
-    object labRestTime: TLabel
-      Align = Center
-      StyledSettings = [Style]
-      Size.Width = 180.000000000000000000
-      Size.Height = 81.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.Font.Size = 72.000000000000000000
-      TextSettings.FontColor = claAliceblue
-      TextSettings.HorzAlign = Center
-      Text = '00:00'
-      TabOrder = 2
-    end
-  end
-  object MediaPlayer1: TMediaPlayer
-    Left = 384
-    Top = 120
   end
 end
