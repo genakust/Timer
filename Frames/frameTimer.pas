@@ -14,18 +14,25 @@ type
     Label2: TLabel;
     imglstTimerFrame: TImageList;
     Image1: TImage;
+    btnGoToSettings: TSpeedButton;
+    procedure btnGoToSettingsClick(Sender: TObject);
   private
     { Private-Deklarationen }
+    FOnButtonClick: TNotifyEvent;
   public
-    btnGoToSettings: TSpeedButton;
     constructor Create(AOwner: TComponent) ; override;
-
-    //property OnButtonClick: TNotifyEvent read FOnClick write FOnClick;
+    property OnButtonClick: TNotifyEvent read FOnButtonClick write FOnButtonClick;
   end;
 
 implementation
 
 {$R *.fmx}
+
+procedure TFrameSingleTimerData.btnGoToSettingsClick(Sender: TObject);
+begin
+  if Assigned(FOnButtonClick) then
+    FOnButtonClick(self);
+end;
 
 constructor TFrameSingleTimerData.Create(AOwner: TComponent);
 begin

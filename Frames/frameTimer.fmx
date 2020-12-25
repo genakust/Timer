@@ -42,6 +42,7 @@ object FrameSingleTimerData: TFrameSingleTimerData
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButton1Style1'
+      OnClick = btnGoToSettingsClick
     end
     object Image1: TImage
       MultiResBitmap.Height = 36

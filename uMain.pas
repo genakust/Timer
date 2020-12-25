@@ -78,7 +78,10 @@ procedure TfrmTimer.CreateAndAddTimerFrame;
 begin
   FFrameSingleTimer1 := TFrameSingleTimerData.Create(tabTimers);
   FFrameSingleTimer1.Parent := tabTimers;
-
+  FFrameSingleTimer1.Align:= TAlignLayout.Top;
+  FFrameSingleTimer1.Width:= tabTimers.Width;
+  FFrameSingleTimer1.OnButtonClick:= btnGoToSettingsOnClick;
+  FFrameSingleTimer1.Visible := True;
 end;
 
 procedure TfrmTimer.FormCreate(Sender: TObject);
@@ -149,8 +152,6 @@ end;
 procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
 begin
   TabControl1.ActiveTab:= tabTimers;
-  FFrameSingleTimer1.btnGoToSettings.OnClick:= btnGoToSettingsOnClick;
-  FFrameSingleTimer1.Visible := True;
 end;
 
 procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);
