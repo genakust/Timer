@@ -7,7 +7,7 @@ uses
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
-  FMX.TabControl, System.ImageList, FMX.ImgList;
+  FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls;
 
 type
   TfrmTimer = class(TForm)
@@ -28,12 +28,18 @@ type
     btnDeleteTimer: TSpeedButton;
     btnBackFromViewTimers: TSpeedButton;
     tabSettings: TTabItem;
+    Frame11: TFrame1;
+    tbarSettings: TToolBar;
+    btnSetiingsBack: TSpeedButton;
+    recSettingsContent: TRectangle;
+    TimeEdit1: TTimeEdit;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
     procedure labRestTimeClick(Sender: TObject);
     procedure btnBackFromViewTimersClick(Sender: TObject);
+    procedure btnSetiingsBackClick(Sender: TObject);
   private
     FTimer1: TTimer;
     /// <summary>
@@ -123,6 +129,11 @@ begin
       MediaPlayer1.Play;
     end;
   end;
+end;
+
+procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
+begin
+  TabControl1.ActiveTab:= tabTimers;
 end;
 
 procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);

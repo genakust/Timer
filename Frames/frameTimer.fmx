@@ -1,0 +1,126 @@
+object Frame1: TFrame1
+  Size.Width = 546.000000000000000000
+  Size.Height = 84.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = xFFE8EAF6
+    Size.Width = 546.000000000000000000
+    Size.Height = 84.000000000000000000
+    Size.PlatformDefault = False
+    object ImageControl1: TImageControl
+      Align = Left
+      Size.Width = 100.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family, Style, FontColor]
+      Padding.Left = 20.000000000000000000
+      Size.Width = 283.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = '5 min'
+      TabOrder = 1
+    end
+    object Label2: TLabel
+      Align = Left
+      StyledSettings = [Family, Style, FontColor]
+      Padding.Left = 20.000000000000000000
+      Position.X = 100.000000000000000000
+      Size.Width = 83.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Timer1'
+      TabOrder = 2
+    end
+    object SpeedButton1: TSpeedButton
+      Align = Right
+      Images = imglstTimerFrame
+      ImageIndex = 1
+      Position.X = 466.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'SpeedButton1Style1'
+    end
+  end
+  object imglstTimerFrame: TImageList
+    Source = <
+      item
+        MultiResBitmap = <
+          item
+          end>
+        Name = 'Item 0'
+      end
+      item
+        MultiResBitmap.Height = 36
+        MultiResBitmap.Width = 36
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Width = 36
+            Height = 36
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+              98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0083494441545847EDD0B10D802014846130960EE1868EE2208EE1328E6001E8
+              3D72769A501821E6BE8400A1787F702222F29294D2648BD7BA2CE4A026A24208
+              2B7BB2EA5168181455020D8A2A8286FF4675DCDFB07BEF379E33348D3C7E0B83
+              FB18E392BF85709FF9FC2DCC56CC2DCC56CCA3A6628C05B0A57ECCC5429A8911
+              11F92FE74E39B74A2D716B8B5C0000000049454E44AE426082}
+            FileName = 
+              'E:\Kode\AppAssets\keyboard_arrow_right-white-18dp\2x\baseline_ke' +
+              'yboard_arrow_right_white_18dp.png'
+          end>
+        Name = 'baseline_keyboard_arrow_right_white_18dp'
+      end
+      item
+        MultiResBitmap.Height = 36
+        MultiResBitmap.Width = 36
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Width = 36
+            Height = 36
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000024000000240806000000E10098
+              98000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              006D494441545847EDD0C10980300C46E1201E1DC20D1DC5411CC3651CC19B26
+              34152F4A0F4543791FFCA4C747050050CFE40BC1420E5F88A855978342440D3A
+              A24A1055AADDA8CE6F0DBB6E4BCFCBE8F773BD6ED1DD7F67D6FD829827C4BC09
+              15632C204C4C6621616200A0512227EE0E40E66B9C52690000000049454E44AE
+              426082}
+            FileName = 
+              'E:\Kode\AppAssets\keyboard_arrow_right-black-18dp\2x\baseline_ke' +
+              'yboard_arrow_right_black_18dp.png'
+          end>
+        Name = 'baseline_keyboard_arrow_right_black_18dp'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'baseline_keyboard_arrow_right_white_18dp'
+            SourceRect.Right = 36.000000000000000000
+            SourceRect.Bottom = 36.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'baseline_keyboard_arrow_right_black_18dp'
+            SourceRect.Right = 36.000000000000000000
+            SourceRect.Bottom = 36.000000000000000000
+          end>
+      end>
+    Left = 360
+    Top = 24
+  end
+end
