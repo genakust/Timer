@@ -7,7 +7,7 @@ uses
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
-  FMX.TabControl;
+  FMX.TabControl, System.ImageList, FMX.ImgList;
 
 type
   TfrmTimer = class(TForm)
@@ -20,18 +20,20 @@ type
     ColorAnimation1: TColorAnimation;
     TabControl1: TTabControl;
     tabTimer: TTabItem;
-    tabSetings: TTabItem;
+    tabTimers: TTabItem;
     ToolBar1: TToolBar;
-    btnBack: TButton;
     StyleBook1: TStyleBook;
-    Line2: TLine;
-    Line1: TLine;
+    btnAddNewTimer: TSpeedButton;
+    ImageList1: TImageList;
+    btnDeleteTimer: TSpeedButton;
+    btnBackFromViewTimers: TSpeedButton;
+    tabSettings: TTabItem;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
     procedure labRestTimeClick(Sender: TObject);
-    procedure btnBackClick(Sender: TObject);
+    procedure btnBackFromViewTimersClick(Sender: TObject);
   private
     FTimer1: TTimer;
     /// <summary>
@@ -62,12 +64,6 @@ begin
   // the place to save target time
   FTimer1.Tag := 6; // min
   FCount := FTimer1.Tag;
-end;
-
-procedure TfrmTimer.btnBackClick(Sender: TObject);
-begin
-  // go back
-  TabControl1.ActiveTab:= tabTimer;
 end;
 
 procedure TfrmTimer.FormCreate(Sender: TObject);
@@ -129,6 +125,12 @@ begin
   end;
 end;
 
+procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);
+begin
+  // go back
+  TabControl1.ActiveTab:= tabTimer;
+end;
+
 function TfrmTimer.GetMediaDir: string;
 begin
   case TOSVersion.Platform of
@@ -148,7 +150,7 @@ end;
 procedure TfrmTimer.labRestTimeClick(Sender: TObject);
 begin
   // go to the settings tab
-  TabControl1.ActiveTab:= tabSetings;
+  TabControl1.ActiveTab:= tabTimers;
 end;
 
 initialization
