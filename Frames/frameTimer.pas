@@ -8,21 +8,29 @@ uses
   FMX.Controls.Presentation, FMX.Objects, System.ImageList, FMX.ImgList;
 
 type
-  TFrame1 = class(TFrame)
+  TFrameSingleTimerData = class(TFrame)
     Rectangle1: TRectangle;
-    Label1: TLabel;
-    ImageControl1: TImageControl;
+    labTimeframe: TLabel;
     Label2: TLabel;
-    SpeedButton1: TSpeedButton;
     imglstTimerFrame: TImageList;
+    Image1: TImage;
   private
     { Private-Deklarationen }
   public
-    { Public-Deklarationen }
+    btnGoToSettings: TSpeedButton;
+    constructor Create(AOwner: TComponent) ; override;
+
+    //property OnButtonClick: TNotifyEvent read FOnClick write FOnClick;
   end;
 
 implementation
 
 {$R *.fmx}
+
+constructor TFrameSingleTimerData.Create(AOwner: TComponent);
+begin
+  inherited;
+
+end;
 
 end.

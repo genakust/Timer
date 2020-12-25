@@ -28,7 +28,6 @@ type
     btnDeleteTimer: TSpeedButton;
     btnBackFromViewTimers: TSpeedButton;
     tabSettings: TTabItem;
-    Frame11: TFrame1;
     tbarSettings: TToolBar;
     btnSetiingsBack: TSpeedButton;
     recSettingsContent: TRectangle;
@@ -40,14 +39,17 @@ type
     procedure labRestTimeClick(Sender: TObject);
     procedure btnBackFromViewTimersClick(Sender: TObject);
     procedure btnSetiingsBackClick(Sender: TObject);
+    procedure btnGoToSettingsOnClick(Sender: TObject);
   private
     FTimer1: TTimer;
+    FFrameSingleTimer1 : TFrameSingleTimerData;
     /// <summary>
     /// Memory for the remaining time
     /// </summary>
     FCount: integer;
     procedure OnTimer1(Sender: TObject);
     procedure PlaySound;
+    procedure CreateAndAddTimerFrame;
   public
     { Public-Deklarationen }
   end;
@@ -72,6 +74,13 @@ begin
   FCount := FTimer1.Tag;
 end;
 
+procedure TfrmTimer.CreateAndAddTimerFrame;
+begin
+  FFrameSingleTimer1 := TFrameSingleTimerData.Create(tabTimers);
+  FFrameSingleTimer1.Parent := tabTimers;
+
+end;
+
 procedure TfrmTimer.FormCreate(Sender: TObject);
 begin
   FCount := 0;
@@ -80,6 +89,7 @@ begin
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
   TabControl1.ActiveTab:= tabTimer;
+  CreateAndAddTimerFrame;
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
@@ -131,9 +141,16 @@ begin
   end;
 end;
 
+procedure TfrmTimer.btnGoToSettingsOnClick(Sender: TObject);
+begin
+  TabControl1.ActiveTab:= tabSettings;
+end;
+
 procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
 begin
   TabControl1.ActiveTab:= tabTimers;
+  FFrameSingleTimer1.btnGoToSettings.OnClick:= btnGoToSettingsOnClick;
+  FFrameSingleTimer1.Visible := True;
 end;
 
 procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);

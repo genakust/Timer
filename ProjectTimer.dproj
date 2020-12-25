@@ -193,7 +193,7 @@
         </DCCReference>
         <DCCReference Include="uConstants.pas"/>
         <DCCReference Include="Frames\frameTimer.pas">
-            <Form>Frame1</Form>
+            <Form>FrameSingleTimerData</Form>
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
