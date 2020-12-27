@@ -8,12 +8,16 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.IOUtils;
 
 type
   TDataModule1 = class(TDataModule)
     FDConnection1: TFDConnection;
-    FDQuery1: TFDQuery;
+    qryCreateTable: TFDQuery;
+    qryAddTimerItem: TFDQuery;
+    qryDeleteItem: TFDQuery;
+    procedure FDConnection1BeforeConnect(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -28,5 +32,13 @@ implementation
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDataModule1.FDConnection1BeforeConnect(Sender: TObject);
+begin
+{$IF DEFINED(iOS) or DEFINED(ANDROID)}
+  FDConnection1.Params.Values['Database'] :=
+      TPath.Combine(TPath.GetDocumentsPath, 'shoplist.s3db');
+  {$ENDIF}
+end;
 
 end.

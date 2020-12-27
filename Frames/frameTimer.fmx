@@ -12,7 +12,7 @@ object FrameSingleTimerData: TFrameSingleTimerData
       Align = Client
       StyledSettings = [Family, Style, FontColor]
       Padding.Left = 20.000000000000000000
-      Size.Width = 203.000000000000000000
+      Size.Width = 306.000000000000000000
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 22.000000000000000000
@@ -25,7 +25,7 @@ object FrameSingleTimerData: TFrameSingleTimerData
       StyledSettings = [Family, Style, FontColor]
       Padding.Left = 20.000000000000000000
       Position.X = 60.000000000000000000
-      Size.Width = 83.000000000000000000
+      Size.Width = 53.000000000000000000
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 22.000000000000000000
@@ -93,8 +93,8 @@ object FrameSingleTimerData: TFrameSingleTimerData
     object cbActive: TCheckBox
       Align = Right
       IsChecked = True
-      Position.X = 346.000000000000000000
-      Size.Width = 120.000000000000000000
+      Position.X = 419.000000000000000000
+      Size.Width = 47.000000000000000000
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'checkboxstyle'

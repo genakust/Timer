@@ -1,7 +1,4 @@
-﻿[ToolBar1]
-Coordinates=257,192,67,36
-
-[TabControl1]
+﻿[TabControl1]
 Coordinates=162,192,85,36
 
 [layBottom]
@@ -38,20 +35,11 @@ Coordinates=134,78,87,58
 [tabSettings]
 Coordinates=307,78,79,36
 
-[btnAddNewTimer]
-Coordinates=10,78,114,58
-
-[btnDeleteTimer]
-Coordinates=10,10,103,58
-
 [ImageList1]
 Coordinates=179,225,77,36
 
-[btnBackFromViewTimers]
-Coordinates=179,10,158,58
-
 []
-Coordinates=123,10,46,58
+Coordinates=257,192,67,36
 Visible=True
 ExplicitSubNodes=Width
 

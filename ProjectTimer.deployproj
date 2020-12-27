@@ -294,6 +294,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="DB\DbTimers.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>ProjectTimer\</RemoteDir>
+            <RemoteName>DbTimers.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="Android\Debug\styles-v21.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>ProjectTimer\res\values-v21\</RemoteDir>
             <RemoteName>styles.xml</RemoteName>
