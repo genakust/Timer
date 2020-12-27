@@ -7,12 +7,14 @@ uses
   FMX.Forms,
   uMain in 'uMain.pas' {frmTimer},
   uConstants in 'uConstants.pas',
-  frameTimer in 'Frames\frameTimer.pas' {FrameSingleTimerData: TFrame};
+  frameTimer in 'Frames\frameTimer.pas' {FrameSingleTimerData: TFrame},
+  uDM in 'DB\uDM.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmTimer, frmTimer);
+  Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.

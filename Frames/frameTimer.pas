@@ -10,18 +10,25 @@ uses
 type
   TFrameSingleTimerData = class(TFrame)
     Rectangle1: TRectangle;
-    labTimeframe: TLabel;
-    Label2: TLabel;
+    labTimerTime: TLabel;
+    labTimerNummer: TLabel;
     imglstTimerFrame: TImageList;
     Image1: TImage;
     btnGoToSettings: TSpeedButton;
+    cbActive: TCheckBox;
     procedure btnGoToSettingsClick(Sender: TObject);
   private
     { Private-Deklarationen }
     FOnButtonClick: TNotifyEvent;
+    function GetTimerNummer: string;
+    procedure SetTimerNummer(const Value: string);
+    function GetTimerTime: string;
+    procedure SetTimerTime(const Value: string);
   public
     constructor Create(AOwner: TComponent) ; override;
     property OnButtonClick: TNotifyEvent read FOnButtonClick write FOnButtonClick;
+    property TimerNummer: string read GetTimerNummer write SetTimerNummer;
+    property TimerTime: string read GetTimerTime write SetTimerTime;
   end;
 
 implementation
@@ -40,4 +47,25 @@ begin
 
 end;
 
+{$REGION '< Properties >'}
+function TFrameSingleTimerData.GetTimerNummer: string;
+begin
+  Result:= labTimerNummer.Text;
+end;
+
+function TFrameSingleTimerData.GetTimerTime: string;
+begin
+  Result:= labTimerTime.Text;
+end;
+
+procedure TFrameSingleTimerData.SetTimerNummer(const Value: string);
+begin
+  labTimerNummer.Text:= Value;
+end;
+
+procedure TFrameSingleTimerData.SetTimerTime(const Value: string);
+begin
+  labTimerTime.Text:= Value;
+end;
+{$ENDREGION}
 end.

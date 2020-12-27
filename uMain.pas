@@ -31,7 +31,6 @@ type
     tbarSettings: TToolBar;
     btnSetiingsBack: TSpeedButton;
     recSettingsContent: TRectangle;
-    TimeEdit1: TTimeEdit;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -49,7 +48,7 @@ type
     FCount: integer;
     procedure OnTimer1(Sender: TObject);
     procedure PlaySound;
-    procedure CreateAndAddTimerFrame;
+    procedure CreateAndAddTimerFrame(aFrameName: string);
   public
     { Public-Deklarationen }
   end;
@@ -74,10 +73,11 @@ begin
   FCount := FTimer1.Tag;
 end;
 
-procedure TfrmTimer.CreateAndAddTimerFrame;
+procedure TfrmTimer.CreateAndAddTimerFrame(aFrameName: string);
 begin
   FFrameSingleTimer1 := TFrameSingleTimerData.Create(tabTimers);
   FFrameSingleTimer1.Parent := tabTimers;
+  FFrameSingleTimer1.Name:= aFrameName;
   FFrameSingleTimer1.Align:= TAlignLayout.Top;
   FFrameSingleTimer1.Width:= tabTimers.Width;
   FFrameSingleTimer1.OnButtonClick:= btnGoToSettingsOnClick;
@@ -92,7 +92,7 @@ begin
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
   TabControl1.ActiveTab:= tabTimer;
-  CreateAndAddTimerFrame;
+  CreateAndAddTimerFrame('Timer1');
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);

@@ -8,19 +8,19 @@ object FrameSingleTimerData: TFrameSingleTimerData
     Size.Width = 546.000000000000000000
     Size.Height = 84.000000000000000000
     Size.PlatformDefault = False
-    object labTimeframe: TLabel
+    object labTimerTime: TLabel
       Align = Client
       StyledSettings = [Family, Style, FontColor]
       Padding.Left = 20.000000000000000000
-      Size.Width = 323.000000000000000000
+      Size.Width = 203.000000000000000000
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 22.000000000000000000
       TextSettings.HorzAlign = Center
-      Text = '5 min'
+      Text = '10 min'
       TabOrder = 0
     end
-    object Label2: TLabel
+    object labTimerNummer: TLabel
       Align = Left
       StyledSettings = [Family, Style, FontColor]
       Padding.Left = 20.000000000000000000
@@ -30,7 +30,7 @@ object FrameSingleTimerData: TFrameSingleTimerData
       Size.PlatformDefault = False
       TextSettings.Font.Size = 22.000000000000000000
       TextSettings.HorzAlign = Center
-      Text = 'Timer1'
+      Text = '1'
       TabOrder = 1
     end
     object btnGoToSettings: TSpeedButton
@@ -89,6 +89,17 @@ object FrameSingleTimerData: TFrameSingleTimerData
       Size.Width = 60.000000000000000000
       Size.Height = 84.000000000000000000
       Size.PlatformDefault = False
+    end
+    object cbActive: TCheckBox
+      Align = Right
+      IsChecked = True
+      Position.X = 346.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'checkboxstyle'
+      TabOrder = 2
+      TextSettings.HorzAlign = Center
     end
   end
   object imglstTimerFrame: TImageList
@@ -160,7 +171,7 @@ object FrameSingleTimerData: TFrameSingleTimerData
             SourceRect.Bottom = 36.000000000000000000
           end>
       end>
-    Left = 360
-    Top = 24
+    Left = 512
+    Top = 32
   end
 end
