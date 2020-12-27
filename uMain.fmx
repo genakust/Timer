@@ -11,6 +11,7 @@ object frmTimer: TfrmTimer
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object MediaPlayer1: TMediaPlayer
     Left = 392
@@ -21,7 +22,7 @@ object frmTimer: TfrmTimer
     Size.Width = 458.000000000000000000
     Size.Height = 606.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     TabPosition = None
     Sizes = (
@@ -35,7 +36,7 @@ object frmTimer: TfrmTimer
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -159,7 +160,7 @@ object frmTimer: TfrmTimer
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False

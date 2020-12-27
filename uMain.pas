@@ -39,6 +39,7 @@ type
     procedure btnBackFromViewTimersClick(Sender: TObject);
     procedure btnSetiingsBackClick(Sender: TObject);
     procedure btnGoToSettingsOnClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FTimer1: TTimer;
     FFrameSingleTimer1 : TFrameSingleTimerData;
@@ -49,6 +50,10 @@ type
     procedure OnTimer1(Sender: TObject);
     procedure PlaySound;
     procedure CreateAndAddTimerFrame(aFrameName: string);
+    /// <summary>
+    /// load data from database and set timer parameters
+    /// </summary>
+    procedure ReadDbAndSetTimer;
   public
     { Public-Deklarationen }
   end;
@@ -63,16 +68,7 @@ uses
 
 {$R *.fmx}
 
-procedure TfrmTimer.btnStartClick(Sender: TObject);
-
-begin
-  // Timer start
-  FTimer1.Enabled := true;
-  // the place to save target time
-  FTimer1.Tag := 6; // min
-  FCount := FTimer1.Tag;
-end;
-
+{$REGION '< Frames >'}
 procedure TfrmTimer.CreateAndAddTimerFrame(aFrameName: string);
 begin
   FFrameSingleTimer1 := TFrameSingleTimerData.Create(tabTimers);
@@ -83,7 +79,9 @@ begin
   FFrameSingleTimer1.OnButtonClick:= btnGoToSettingsOnClick;
   FFrameSingleTimer1.Visible := True;
 end;
+{$ENDREGION}
 
+{$REGION '< Form Create and Co >'}
 procedure TfrmTimer.FormCreate(Sender: TObject);
 begin
   FCount := 0;
@@ -100,6 +98,14 @@ begin
   FTimer1.Free;
 end;
 
+procedure TfrmTimer.FormShow(Sender: TObject);
+begin
+  // load data from database and set timer parameters
+  ReadDbAndSetTimer;
+end;
+{$ENDREGION}
+
+{$REGION '< Timer >'}
 procedure TfrmTimer.OnTimer1(Sender: TObject);
 var
   min: integer;
@@ -112,7 +118,6 @@ begin
   begin
     FTimer1.Enabled := false;
     PlaySound();
-
   end;
 
   temp := FCount / 60;
@@ -122,6 +127,13 @@ begin
   labRestTime.Text := min.ToString + ':' + sec.ToString;
 end;
 
+procedure TfrmTimer.ReadDbAndSetTimer;
+begin
+
+end;
+{$ENDREGION}
+
+{$REGION '< Mediaplayer >'}
 procedure TfrmTimer.PlaySound;
 var
  fileName: string;
@@ -143,7 +155,9 @@ begin
     end;
   end;
 end;
+{$ENDREGION}
 
+{$REGION '< onClick of Buttons, Labels...'}
 procedure TfrmTimer.btnGoToSettingsOnClick(Sender: TObject);
 begin
   TabControl1.ActiveTab:= tabSettings;
@@ -182,6 +196,15 @@ begin
   TabControl1.ActiveTab:= tabTimers;
 end;
 
+procedure TfrmTimer.btnStartClick(Sender: TObject);
+begin
+  // Timer start
+  FTimer1.Enabled := true;
+  // the place to save target time
+  FTimer1.Tag := 60 * 10; // min
+  FCount := FTimer1.Tag;
+end;
+{$ENDREGION}
 initialization
 
 ReportMemoryLeaksOnShutdown := true;
