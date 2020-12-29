@@ -8,7 +8,9 @@ uses
   uMain in 'uMain.pas' {frmTimer},
   uConstants in 'uConstants.pas',
   frameTimer in 'Frames\frameTimer.pas' {FrameSingleTimerData: TFrame},
-  uDM in 'DB\uDM.pas' {DataModule1: TDataModule};
+  uDM in 'DB\uDM.pas' {DataModule1: TDataModule},
+  uTimerModel in 'Models\uTimerModel.pas',
+  uUtills in 'Utills\uUtills.pas';
 
 {$R *.res}
 

@@ -202,6 +202,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="Models\uTimerModel.pas"/>
+        <DCCReference Include="Utills\uUtills.pas"/>
         <RcItem Include="Assets\tibetan bowl.wav">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>
