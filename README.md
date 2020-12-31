@@ -1,2 +1,2 @@
 # Timer
-Timer for meditation
+single Timer or chained Timers
