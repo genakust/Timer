@@ -7,7 +7,9 @@ uses
   System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
-  FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls;
+  FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls,
+  FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
+  FMX.ListView;
 
 type
   TfrmTimer = class(TForm)
@@ -31,6 +33,7 @@ type
     btnDelete: TSpeedButton;
     Rectangle2: TRectangle;
     btnSetiingsBack: TSpeedButton;
+    lvTimers: TListView;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -71,13 +74,11 @@ uses
 {$REGION '< Frames >'}
 procedure TfrmTimer.CreateAndAddTimerFrame(aFrameName: string);
 begin
-  FFrameSingleTimer1 := TFrameSingleTimerData.Create(tabTimers);
-  FFrameSingleTimer1.Parent := tabTimers;
+  FFrameSingleTimer1 := TFrameSingleTimerData.Create(nil);
   FFrameSingleTimer1.Name:= aFrameName;
-  FFrameSingleTimer1.Align:= TAlignLayout.Top;
-  FFrameSingleTimer1.Width:= tabTimers.Width;
+  FFrameSingleTimer1.Width:= lvTimers.Width;
   FFrameSingleTimer1.OnButtonClick:= btnGoToSettingsOnClick;
-  FFrameSingleTimer1.Visible := True;
+  lvTimers.AddObject(FFrameSingleTimer1);
 end;
 {$ENDREGION}
 
@@ -204,6 +205,8 @@ begin
   FTimer1.Tag := 60 * 10; // min
   FCount := FTimer1.Tag;
 end;
+
+
 {$ENDREGION}
 initialization
 
