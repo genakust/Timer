@@ -43,9 +43,12 @@ type
     procedure btnSetiingsBackClick(Sender: TObject);
     procedure btnGoToSettingsOnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure lvTimersItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+  private const
+    CFRAME_NAME: string = 'Timer';
   private
     FTimer1: TTimer;
-    FFrameSingleTimer1 : TFrameSingleTimerData;
     /// <summary>
     /// Memory for the remaining time
     /// </summary>
@@ -70,19 +73,26 @@ uses
   uConstants, System.iOUtils;
 
 {$R *.fmx}
-
 {$REGION '< Frames >'}
+
 procedure TfrmTimer.CreateAndAddTimerFrame(aFrameName: string);
+var
+  FFrameSingleTimer1: TFrameSingleTimerData;
 begin
   FFrameSingleTimer1 := TFrameSingleTimerData.Create(nil);
-  FFrameSingleTimer1.Name:= aFrameName;
-  FFrameSingleTimer1.Width:= lvTimers.Width;
-  FFrameSingleTimer1.OnButtonClick:= btnGoToSettingsOnClick;
-  lvTimers.AddObject(FFrameSingleTimer1);
+  FFrameSingleTimer1.Name := aFrameName;
+  FFrameSingleTimer1.Width := lvTimers.Width;
+  FFrameSingleTimer1.OnButtonClick := btnGoToSettingsOnClick;
+  lvTimers.BeginUpdate;
+  try
+    lvTimers.AddObject(FFrameSingleTimer1);
+  finally
+    lvTimers.EndUpdate;
+  end;
 end;
 {$ENDREGION}
-
 {$REGION '< Form Create and Co >'}
+
 procedure TfrmTimer.FormCreate(Sender: TObject);
 begin
   FCount := 0;
@@ -90,8 +100,8 @@ begin
   FTimer1.Interval := TIMER_INTERVAL;
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
-  TabControl1.ActiveTab:= tabTimer;
-  CreateAndAddTimerFrame('Timer1');
+  TabControl1.ActiveTab := tabTimer;
+  //CreateAndAddTimerFrame(CFRAME_NAME + '1');
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
@@ -105,8 +115,8 @@ begin
   ReadDbAndSetTimer;
 end;
 {$ENDREGION}
-
 {$REGION '< Timer >'}
+
 procedure TfrmTimer.OnTimer1(Sender: TObject);
 var
   min: integer;
@@ -133,20 +143,20 @@ begin
 
 end;
 {$ENDREGION}
-
 {$REGION '< Mediaplayer >'}
+
 procedure TfrmTimer.PlaySound;
 var
- fileName: string;
+  fileName: string;
 begin
 {$IFDEF ANDROID}
-  fileName := TPath.Combine(GetMediaDir,'tibetan bowl.3gp');
+  fileName := TPath.Combine(GetMediaDir, 'tibetan bowl.3gp');
 {$ENDIF}
 {$IFDEF MSWINDOWS}
   fileName := GetMediaDir + '\tibetan bowl.wav';
 {$ENDIF}
-  if Assigned(MediaPlayer1)then
-    MediaPlayer1.FileName:= fileName;
+  if Assigned(MediaPlayer1) then
+    MediaPlayer1.fileName := fileName;
   if MediaPlayer1.Media <> nil then
   begin
     if (MediaPlayer1.State = TMediaState.Unavailable) or
@@ -157,22 +167,22 @@ begin
   end;
 end;
 {$ENDREGION}
-
 {$REGION '< onClick of Buttons, Labels...'}
+
 procedure TfrmTimer.btnGoToSettingsOnClick(Sender: TObject);
 begin
-  TabControl1.ActiveTab:= tabSettings;
+  TabControl1.ActiveTab := tabSettings;
 end;
 
 procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
 begin
-  TabControl1.ActiveTab:= tabTimers;
+  TabControl1.ActiveTab := tabTimers;
 end;
 
 procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);
 begin
   // go back
-  TabControl1.ActiveTab:= tabTimer;
+  TabControl1.ActiveTab := tabTimer;
 end;
 
 function TfrmTimer.GetMediaDir: string;
@@ -194,7 +204,13 @@ end;
 procedure TfrmTimer.labRestTimeClick(Sender: TObject);
 begin
   // go to the settings tab
-  TabControl1.ActiveTab:= tabTimers;
+  TabControl1.ActiveTab := tabTimers;
+end;
+
+procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  ShowMessage('Hallo');
 end;
 
 procedure TfrmTimer.btnStartClick(Sender: TObject);
@@ -206,8 +222,8 @@ begin
   FCount := FTimer1.Tag;
 end;
 
-
 {$ENDREGION}
+
 initialization
 
 ReportMemoryLeaksOnShutdown := true;

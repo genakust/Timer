@@ -9,6 +9,9 @@
         <Projects Include="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="E:\Kode\Delphi\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance\SampleListViewMultiDetailAppearancePackage.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="CubsStats:Make">
         <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Make"/>
     </Target>
+    <Target Name="SampleListViewMultiDetailAppearancePackage">
+        <MSBuild Projects="E:\Kode\Delphi\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance\SampleListViewMultiDetailAppearancePackage.dproj"/>
+    </Target>
+    <Target Name="SampleListViewMultiDetailAppearancePackage:Clean">
+        <MSBuild Projects="E:\Kode\Delphi\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance\SampleListViewMultiDetailAppearancePackage.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SampleListViewMultiDetailAppearancePackage:Make">
+        <MSBuild Projects="E:\Kode\Delphi\RADStudio10.4Demos-master\RADStudio10.4Demos-master\Object Pascal\Multi-Device Samples\User Interface\ListView\ListViewMultiDetailAppearance\SampleListViewMultiDetailAppearancePackage.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectTimer;CubsStats"/>
+        <CallTarget Targets="ProjectTimer;CubsStats;SampleListViewMultiDetailAppearancePackage"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectTimer:Clean;CubsStats:Clean"/>
+        <CallTarget Targets="ProjectTimer:Clean;CubsStats:Clean;SampleListViewMultiDetailAppearancePackage:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectTimer:Make;CubsStats:Make"/>
+        <CallTarget Targets="ProjectTimer:Make;CubsStats:Make;SampleListViewMultiDetailAppearancePackage:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
