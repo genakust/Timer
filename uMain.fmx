@@ -156,8 +156,8 @@ object frmTimer: TfrmTimer
         end
       end
       object lvTimers: TListView
-        ItemAppearanceClassName = 'TImageListItemAppearance'
-        ItemEditAppearanceClassName = 'TImageListItemDeleteAppearance'
+        ItemAppearanceClassName = 'TDynamicAppearance'
+        ItemEditAppearanceClassName = 'TDynamicAppearance'
         HeaderAppearanceClassName = 'TListHeaderObjects'
         FooterAppearanceClassName = 'TListHeaderObjects'
         Align = Client
@@ -165,6 +165,42 @@ object frmTimer: TfrmTimer
         Size.Height = 556.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
+        ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'TimerText'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Width = 217.000000000000000000
+            Appearance.Height = -68.000000000000000000
+            Appearance.PlaceOffset.X = 70.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'TimerImage'
+            AppearanceClassName = 'TImageObjectAppearance'
+            Appearance.Width = 71.000000000000000000
+            Appearance.Height = -124.000000000000000000
+            Appearance.VertAlign = Trailing
+          end
+          item
+            AppearanceObjectName = 'TimerAccessoryGoToSettings'
+            AppearanceClassName = 'TAccessoryObjectAppearance'
+            Appearance.Width = 65.000000000000000000
+            Appearance.Height = 44.000000000000000000
+            Appearance.VertAlign = Center
+            Appearance.PlaceOffset.X = 372.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'Accessory4'
+            AppearanceClassName = 'TAccessoryObjectAppearance'
+            Appearance.AccessoryType = Checkmark
+            Appearance.Width = 87.000000000000000000
+            Appearance.Height = -84.000000000000000000
+            Appearance.PlaceOffset.X = 286.000000000000000000
+          end>
+        ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'Text1'
+            AppearanceClassName = 'TTextObjectAppearance'
+          end>
         OnItemClick = lvTimersItemClick
       end
     end
