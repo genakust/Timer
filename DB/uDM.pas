@@ -17,6 +17,7 @@ type
     qryCreateTable: TFDQuery;
     qryAddTimerItem: TFDQuery;
     qryDeleteItem: TFDQuery;
+    qryGetItemsCount: TFDQuery;
     procedure FDConnection1BeforeConnect(Sender: TObject);
   private
     { Private-Deklarationen }

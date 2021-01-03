@@ -8,6 +8,7 @@ object DataModule1: TDataModule1
         'Database=D:\Dokumente\Embarcadero\Studio\Projekte\Timer\DB\DbTim' +
         'ers.db'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     BeforeConnect = FDConnection1BeforeConnect
     Left = 56
@@ -70,5 +71,12 @@ object DataModule1: TDataModule1
         ParamType = ptInput
         Value = Null
       end>
+  end
+  object qryGetItemsCount: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT COUNT(Id) FROM Timers ')
+    Left = 192
+    Top = 152
   end
 end
