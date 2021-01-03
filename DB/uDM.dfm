@@ -79,4 +79,20 @@ object DataModule1: TDataModule1
     Left = 192
     Top = 152
   end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'insert into Timers(Hours, Minutes, Seconds, IsActive) values(0,1' +
+        '0,0,1)')
+    Left = 232
+    Top = 24
+  end
+  object qrySelectAll: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from Timers')
+    Left = 216
+    Top = 96
+  end
 end

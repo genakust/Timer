@@ -18,11 +18,13 @@ type
     qryAddTimerItem: TFDQuery;
     qryDeleteItem: TFDQuery;
     qryGetItemsCount: TFDQuery;
+    FDQuery1: TFDQuery;
+    qrySelectAll: TFDQuery;
     procedure FDConnection1BeforeConnect(Sender: TObject);
   private
     { Private-Deklarationen }
   public
-    { Public-Deklarationen }
+    function GetItemsCount: integer;
   end;
 
 var
@@ -40,6 +42,17 @@ begin
   FDConnection1.Params.Values['Database'] :=
       TPath.Combine(TPath.GetDocumentsPath, 'shoplist.s3db');
   {$ENDIF}
+end;
+
+function TDataModule1.GetItemsCount: integer;
+begin
+  qryGetItemsCount.Active;
+  try
+    qryGetItemsCount.ExecSQL;
+    Result:= qryGetItemsCount.RecordCount;
+  finally
+    qryGetItemsCount.Close;
+  end;
 end;
 
 end.

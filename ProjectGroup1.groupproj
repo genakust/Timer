@@ -6,7 +6,7 @@
         <Projects Include="ProjectTimer.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj">
+        <Projects Include="Test\ProjectTimerTests.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -26,23 +26,23 @@
     <Target Name="ProjectTimer:Make">
         <MSBuild Projects="ProjectTimer.dproj" Targets="Make"/>
     </Target>
-    <Target Name="CubsStats">
-        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj"/>
+    <Target Name="ProjectTimerTests">
+        <MSBuild Projects="Test\ProjectTimerTests.dproj"/>
     </Target>
-    <Target Name="CubsStats:Clean">
-        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Clean"/>
+    <Target Name="ProjectTimerTests:Clean">
+        <MSBuild Projects="Test\ProjectTimerTests.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="CubsStats:Make">
-        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Make"/>
+    <Target Name="ProjectTimerTests:Make">
+        <MSBuild Projects="Test\ProjectTimerTests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectTimer;CubsStats"/>
+        <CallTarget Targets="ProjectTimer;ProjectTimerTests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectTimer:Clean;CubsStats:Clean"/>
+        <CallTarget Targets="ProjectTimer:Clean;ProjectTimerTests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectTimer:Make;CubsStats:Make"/>
+        <CallTarget Targets="ProjectTimer:Make;ProjectTimerTests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
