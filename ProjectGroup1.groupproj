@@ -9,6 +9,9 @@
         <Projects Include="Test\ProjectTimerTests.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="ProjectTimerTests:Make">
         <MSBuild Projects="Test\ProjectTimerTests.dproj" Targets="Make"/>
     </Target>
+    <Target Name="CubsStats">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj"/>
+    </Target>
+    <Target Name="CubsStats:Clean">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CubsStats:Make">
+        <MSBuild Projects="E:\Kode\Delphi\MobileViewManagement\CubsStats.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ProjectTimer;ProjectTimerTests"/>
+        <CallTarget Targets="ProjectTimer;ProjectTimerTests;CubsStats"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ProjectTimer:Clean;ProjectTimerTests:Clean"/>
+        <CallTarget Targets="ProjectTimer:Clean;ProjectTimerTests:Clean;CubsStats:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ProjectTimer:Make;ProjectTimerTests:Make"/>
+        <CallTarget Targets="ProjectTimer:Make;ProjectTimerTests:Make;CubsStats:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

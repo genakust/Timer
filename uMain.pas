@@ -9,7 +9,7 @@ uses
   FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
   FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView;
+  FMX.ListView, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TfrmTimer = class(TForm)
@@ -34,6 +34,7 @@ type
     Rectangle2: TRectangle;
     btnSetiingsBack: TSpeedButton;
     lvTimers: TListView;
+    PrototypeBindSource1: TPrototypeBindSource;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -70,7 +71,7 @@ var
 implementation
 
 uses
-  uConstants, System.iOUtils;
+  uConstants, System.iOUtils, uDM, FireDAC.Comp.Client;
 
 {$R *.fmx}
 {$REGION '< Frames >'}
@@ -101,7 +102,7 @@ begin
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
   TabControl1.ActiveTab := tabTimer;
-  //CreateAndAddTimerFrame(CFRAME_NAME + '1');
+  // CreateAndAddTimerFrame(CFRAME_NAME + '1');
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
@@ -139,8 +140,40 @@ begin
 end;
 
 procedure TfrmTimer.ReadDbAndSetTimer;
+var
+  query: TFDQuery;
+  ItemToAdd: TListViewItem;
+  timeText: string;
 begin
+  query := DataModule1.qrySelectAll;
+  query.Close;
+  try
+    lvTimers.BeginUpdate;
+    query.Open;
+    if (query.RecordCount > 0) then
+    begin
+      try
 
+        query.First;
+        while not query.Eof do
+        begin
+          ItemToAdd := lvTimers.Items.Add;
+          timeText:= query.FieldByName('Minutes').AsString + ' min ' +
+            query.FieldByName('Seconds').AsString + ' sec';
+          ItemToAdd.Data['TimerText'] := timeText;
+
+
+          if query.FieldByName('IsActive').AsInteger > 0 then
+            // ItemToAdd.Accessory.Checkmark;
+            query.Next;
+        end;
+      finally
+        query.Close;
+      end;
+    end;
+  finally
+    lvTimers.EndUpdate;
+  end;
 end;
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
