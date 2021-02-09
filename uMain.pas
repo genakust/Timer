@@ -33,8 +33,8 @@ type
     btnDelete: TSpeedButton;
     Rectangle2: TRectangle;
     btnSetiingsBack: TSpeedButton;
-    lvTimers: TListView;
     PrototypeBindSource1: TPrototypeBindSource;
+    lvTimers: TListView;
     procedure btnStartClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -46,6 +46,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure lvTimersItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure btnAddTimerClick(Sender: TObject);
   private const
     CFRAME_NAME: string = 'Timer';
   private
@@ -60,7 +61,10 @@ type
     /// <summary>
     /// load data from database and set timer parameters
     /// </summary>
-    procedure ReadDbAndSetTimer;
+    procedure UpdateTimersList;
+    ///<summary>Clear ListViewItems
+    /// </summary>
+    procedure DeleteItems;
   public
     { Public-Deklarationen }
   end;
@@ -91,6 +95,17 @@ begin
     lvTimers.EndUpdate;
   end;
 end;
+
+procedure TfrmTimer.DeleteItems;
+begin
+  lvTimers.BeginUpdate;
+  try
+    lvTimers.Items.Clear;
+  finally
+    lvTimers.EndUpdate;
+  end;
+end;
+
 {$ENDREGION}
 {$REGION '< Form Create and Co >'}
 
@@ -113,7 +128,7 @@ end;
 procedure TfrmTimer.FormShow(Sender: TObject);
 begin
   // load data from database and set timer parameters
-  ReadDbAndSetTimer;
+  UpdateTimersList;
 end;
 {$ENDREGION}
 {$REGION '< Timer >'}
@@ -139,42 +154,49 @@ begin
   labRestTime.Text := min.ToString + ':' + sec.ToString;
 end;
 
-procedure TfrmTimer.ReadDbAndSetTimer;
+procedure TfrmTimer.UpdateTimersList;
+const
+  timerName: string = 'Timer ';
 var
-  query: TFDQuery;
   ItemToAdd: TListViewItem;
+  query: TFDQuery;
   timeText: string;
+  number: integer;
 begin
   query := DataModule1.qrySelectAll;
   query.Close;
+  number:= 1;
+  DeleteItems;
+  lvTimers.BeginUpdate;
   try
-    lvTimers.BeginUpdate;
     query.Open;
-    if (query.RecordCount > 0) then
-    begin
-      try
-
+    try
+      if (query.RecordCount > 0) then
+      begin
         query.First;
         while not query.Eof do
         begin
+          // add a new item to list
           ItemToAdd := lvTimers.Items.Add;
-          timeText:= query.FieldByName('Minutes').AsString + ' min ' +
+          // Timer name
+          ItemToAdd.Data['TimerName'] := timerName + number.ToString;
+          // duration
+          timeText := query.FieldByName('Minutes').AsString + ' min ' +
             query.FieldByName('Seconds').AsString + ' sec';
-          ItemToAdd.Data['TimerText'] := timeText;
-
-
-          if query.FieldByName('IsActive').AsInteger > 0 then
-            // ItemToAdd.Accessory.Checkmark;
-            query.Next;
+          ItemToAdd.Data['TimerDuration'] := timeText;
+          // couont the items
+          number:= number +1;
+          query.Next;
         end;
-      finally
-        query.Close;
       end;
+    finally
+      query.Close;
     end;
   finally
     lvTimers.EndUpdate;
   end;
 end;
+
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
 
@@ -210,6 +232,27 @@ end;
 procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
 begin
   TabControl1.ActiveTab := tabTimers;
+end;
+
+procedure TfrmTimer.btnAddTimerClick(Sender: TObject);
+var
+  query: TFDQuery;
+begin
+  query := DataModule1.qryAddTimerItem;
+  query.Close;
+  // Fill params with value
+  query.Params.ParamByName('Hours').Value := 0;
+  query.Params.ParamByName('Minutes').Value := 5;
+  query.Params.ParamByName('Seconds').Value := 0;
+  query.Params.ParamByName('IsActive').Value := 1;
+
+  try
+    query.ExecSQL;
+  finally
+    query.Close;
+  end;
+  DeleteItems;
+  UpdateTimersList;
 end;
 
 procedure TfrmTimer.btnBackFromViewTimersClick(Sender: TObject);
