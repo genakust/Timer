@@ -171,12 +171,15 @@ object frmTimer: TfrmTimer
           item
             AppearanceObjectName = 'TimerName'
             AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 18.000000000000000000
+            Appearance.TextAlign = Leading
             Appearance.Width = 375.000000000000000000
             Appearance.Height = 40.000000000000000000
           end
           item
             AppearanceObjectName = 'TimerDuration'
             AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 14.000000000000000000
             Appearance.Width = 375.000000000000000000
             Appearance.Height = 40.000000000000000000
             Appearance.PlaceOffset.Y = 40.000000000000000000
