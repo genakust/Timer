@@ -9,13 +9,12 @@ uses
   FMX.Objects, FMX.Controls.Presentation, FMX.Layouts, FMX.Media, FMX.Ani,
   FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, Data.Bind.Components, Data.Bind.ObjectScope;
+  FMX.ListView, Data.Bind.Components, Data.Bind.ObjectScope, System.Actions,
+  FMX.ActnList;
 
 type
   TfrmTimer = class(TForm)
     layContent: TLayout;
-    btnStart: TCornerButton;
-    layBottom: TLayout;
     recTimer: TRectangle;
     labRestTime: TLabel;
     MediaPlayer1: TMediaPlayer;
@@ -35,7 +34,10 @@ type
     btnSetiingsBack: TSpeedButton;
     PrototypeBindSource1: TPrototypeBindSource;
     lvTimers: TListView;
-    procedure btnStartClick(Sender: TObject);
+    ActionList1: TActionList;
+    actStartTimer: TAction;
+    layImage: TLayout;
+    recImage: TRoundRect;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
@@ -47,6 +49,7 @@ type
     procedure lvTimersItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure btnAddTimerClick(Sender: TObject);
+    procedure actStartTimerExecute(Sender: TObject);
   private const
     CFRAME_NAME: string = 'Timer';
   private
@@ -289,7 +292,10 @@ begin
   ShowMessage('Hallo');
 end;
 
-procedure TfrmTimer.btnStartClick(Sender: TObject);
+{$ENDREGION}
+
+ {$REGION '< Actions'}
+procedure TfrmTimer.actStartTimerExecute(Sender: TObject);
 begin
   // Timer start
   FTimer1.Enabled := true;
@@ -297,9 +303,7 @@ begin
   FTimer1.Tag := 60 * 10; // min
   FCount := FTimer1.Tag;
 end;
-
-{$ENDREGION}
-
+ {$ENDREGION}
 initialization
 
 ReportMemoryLeaksOnShutdown := true;
