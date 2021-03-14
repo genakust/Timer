@@ -193,9 +193,17 @@ begin
             query.FieldByName('Seconds').AsString + ' sec';
           ItemToAdd.Data['TimerDuration'] := timeText;
           // set if timer is active
-          TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
-            imgChecked.Bitmap;
-          // couont the items
+          if query.FieldByName('IsActive').AsInteger = 1 then
+          begin
+            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
+              imgChecked.Bitmap;
+          end
+          else
+          begin
+            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
+              imgUnchecked.Bitmap;
+          end;
+          // count the items
           number:= number +1;
           query.Next;
         end;
