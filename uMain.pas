@@ -32,12 +32,13 @@ type
     btnDelete: TSpeedButton;
     Rectangle2: TRectangle;
     btnSetiingsBack: TSpeedButton;
-    PrototypeBindSource1: TPrototypeBindSource;
     lvTimers: TListView;
     ActionList1: TActionList;
     actStartTimer: TAction;
     layImage: TLayout;
     recImage: TRoundRect;
+    imgChecked: TImage;
+    imgUnchecked: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
@@ -120,6 +121,10 @@ begin
   FTimer1.Enabled := false;
   FTimer1.OnTimer := OnTimer1;
   TabControl1.ActiveTab := tabTimer;
+  // set images unvisible
+  imgChecked.Visible:= false;
+  imgUnchecked.Visible:= false;
+
   // CreateAndAddTimerFrame(CFRAME_NAME + '1');
 end;
 
@@ -187,6 +192,9 @@ begin
           timeText := query.FieldByName('Minutes').AsString + ' min ' +
             query.FieldByName('Seconds').AsString + ' sec';
           ItemToAdd.Data['TimerDuration'] := timeText;
+          // set if timer is active
+          TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
+            imgChecked.Bitmap;
           // couont the items
           number:= number +1;
           query.Next;
@@ -224,6 +232,8 @@ begin
     end;
   end;
 end;
+
+
 {$ENDREGION}
 {$REGION '< onClick of Buttons, Labels...'}
 
