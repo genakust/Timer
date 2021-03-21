@@ -66,7 +66,13 @@ type
     /// load data from database and set timer parameters
     /// </summary>
     procedure UpdateTimersList;
-    ///<summary>Clear ListViewItems
+    /// <summary>
+    /// Add single item to ListView
+    /// </summary>
+    procedure AddItem(const aTimerNum, aTimerDuration: string;
+      aIsActive: integer);
+    procedure SelectItem(Item: TListViewItem);
+    /// <summary>Clear ListViewItems
     /// </summary>
     procedure DeleteItems;
   public
@@ -100,16 +106,6 @@ begin
   end;
 end;
 
-procedure TfrmTimer.DeleteItems;
-begin
-  lvTimers.BeginUpdate;
-  try
-    lvTimers.Items.Clear;
-  finally
-    lvTimers.EndUpdate;
-  end;
-end;
-
 {$ENDREGION}
 {$REGION '< Form Create and Co >'}
 
@@ -122,10 +118,10 @@ begin
   FTimer1.OnTimer := OnTimer1;
   TabControl1.ActiveTab := tabTimer;
   // set images unvisible
-  imgChecked.Visible:= false;
-  imgUnchecked.Visible:= false;
+  imgChecked.Visible := false;
+  imgUnchecked.Visible := false;
 
-  // CreateAndAddTimerFrame(CFRAME_NAME + '1');
+  btnDelete.Enabled:= false;
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
@@ -162,6 +158,20 @@ begin
   labRestTime.Text := min.ToString + ':' + sec.ToString;
 end;
 
+{$ENDREGION}
+{$REGION '< ListView/Items >'}
+
+procedure TfrmTimer.SelectItem(Item: TListViewItem);
+begin
+   { TODO : select item procedure }
+end;
+
+procedure TfrmTimer.AddItem(const aTimerNum, aTimerDuration: string;
+  aIsActive: integer);
+begin
+  { TODO : insert code from below }
+end;
+
 procedure TfrmTimer.UpdateTimersList;
 const
   timerName: string = 'Timer ';
@@ -173,7 +183,7 @@ var
 begin
   query := DataModule1.qrySelectAll;
   query.Close;
-  number:= 1;
+  number := 1;
   DeleteItems;
   lvTimers.BeginUpdate;
   try
@@ -188,6 +198,8 @@ begin
           ItemToAdd := lvTimers.Items.Add;
           // Timer name
           ItemToAdd.Data['TimerName'] := timerName + number.ToString;
+          // for item identification, like tag-property
+          ItemToAdd.TagString := number.ToString;
           // duration
           timeText := query.FieldByName('Minutes').AsString + ' min ' +
             query.FieldByName('Seconds').AsString + ' sec';
@@ -195,16 +207,18 @@ begin
           // set if timer is active
           if query.FieldByName('IsActive').AsInteger = 1 then
           begin
-            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
-              imgChecked.Bitmap;
+            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap
+              := imgChecked.Bitmap;
+            ItemToAdd.Checked := true;
           end
           else
           begin
-            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap:=
-              imgUnchecked.Bitmap;
+            TListItemImage(ItemToAdd.Objects.FindDrawable('imgActive')).Bitmap
+              := imgUnchecked.Bitmap;
+            ItemToAdd.Checked := false;
           end;
           // count the items
-          number:= number +1;
+          number := number + 1;
           query.Next;
         end;
       end;
@@ -216,6 +230,15 @@ begin
   end;
 end;
 
+procedure TfrmTimer.DeleteItems;
+begin
+  lvTimers.BeginUpdate;
+  try
+    lvTimers.Items.Clear;
+  finally
+    lvTimers.EndUpdate;
+  end;
+end;
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
 
@@ -240,7 +263,6 @@ begin
     end;
   end;
 end;
-
 
 {$ENDREGION}
 {$REGION '< onClick of Buttons, Labels...'}
@@ -311,8 +333,8 @@ begin
 end;
 
 {$ENDREGION}
+{$REGION '< Actions'}
 
- {$REGION '< Actions'}
 procedure TfrmTimer.actStartTimerExecute(Sender: TObject);
 begin
   // Timer start
@@ -321,7 +343,8 @@ begin
   FTimer1.Tag := 60 * 10; // min
   FCount := FTimer1.Tag;
 end;
- {$ENDREGION}
+{$ENDREGION}
+
 initialization
 
 ReportMemoryLeaksOnShutdown := true;
