@@ -1,39 +1,92 @@
 ﻿[TabControl1]
-Coordinates=162,192,85,36
+Coordinates=162,192,74,33
 
 [ColorAnimation1]
-Coordinates=192,1,110,36
+Coordinates=192,1,97,33
 
 [MediaPlayer1]
-Coordinates=340,1,93,36
+Coordinates=340,1,80,33
 
 [StyleBook1]
-Coordinates=229,111,80,36
+Coordinates=229,111,70,33
 
 [tabTimer]
-Coordinates=253,146,65,36
+Coordinates=253,146,57,33
 
 [tabTimers]
-Coordinates=550,20,72,58
+Coordinates=550,20,63,51
 ExplicitSubNodes=Width
 
 [layContent]
-Coordinates=85,146,76,36
+Coordinates=85,146,67,33
 
 [recTimer]
-Coordinates=10,146,65,36
+Coordinates=10,146,57,33
 
 [labRestTime]
-Coordinates=134,78,87,58
+Coordinates=134,78,75,51
 
 [tabSettings]
-Coordinates=307,78,79,36
+Coordinates=307,78,70,33
 
 [ImageList1]
-Coordinates=179,225,77,36
+Coordinates=179,225,68,33
 
 []
-Coordinates=80,192,72,36
+Coordinates=207,372,91,36
 Visible=True
 ExplicitSubNodes=Width
+
+[Rectangle1]
+Coordinates=424,56,69,33
+
+[layImage]
+Coordinates=20,77,58,33
+
+[btnSetiingsBack]
+Coordinates=43,276,95,51
+
+[btnBacktoHome]
+Coordinates=220,78,93,51
+
+[ActionList1]
+Coordinates=424,111,70,33
+
+[recSettingsContent]
+Coordinates=471,166,109,33
+
+[lvTimers]
+Coordinates=89,1,94,213
+Visible=True
+
+[imgUnchecked]
+Coordinates=160,276,87,51
+
+[btnAddTimer]
+Coordinates=239,1,78,51
+
+[recImage]
+Coordinates=424,221,59,33
+
+[actStartTimer]
+Coordinates=424,276,80,33
+
+[Rectangle2]
+Coordinates=424,331,69,33
+
+[imgChecked]
+Coordinates=259,201,75,51
+
+[btnDelete]
+Coordinates=0,0,61,69
+ExplicitSubNodes=Enabled
+
+[layComboBox]
+Coordinates=306,372,83,33
+
+[ComboBox1]
+Coordinates=405,372,84,123
+
+[BindingsList1]
+Coordinates=424,1,82,33
 

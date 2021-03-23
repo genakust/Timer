@@ -10,7 +10,8 @@ uses
   FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.ListView, Data.Bind.Components, Data.Bind.ObjectScope, System.Actions,
-  FMX.ActnList;
+  FMX.ActnList, FMX.ListBox, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Fmx.Bind.Editors;
 
 type
   TfrmTimer = class(TForm)
@@ -39,6 +40,9 @@ type
     recImage: TRoundRect;
     imgChecked: TImage;
     imgUnchecked: TImage;
+    ComboBox1: TComboBox;
+    layComboBox: TLayout;
+    BindingsList1: TBindingsList;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     function GetMediaDir: string;
@@ -239,6 +243,12 @@ begin
     lvTimers.EndUpdate;
   end;
 end;
+
+procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  TabControl1.ActiveTab := tabSettings;
+end;
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
 
@@ -275,6 +285,7 @@ end;
 procedure TfrmTimer.btnSetiingsBackClick(Sender: TObject);
 begin
   TabControl1.ActiveTab := tabTimers;
+  { TODO : update time of selected item }
 end;
 
 procedure TfrmTimer.btnAddTimerClick(Sender: TObject);
@@ -324,12 +335,6 @@ procedure TfrmTimer.labRestTimeClick(Sender: TObject);
 begin
   // go to the settings tab
   TabControl1.ActiveTab := tabTimers;
-end;
-
-procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
-begin
-  ShowMessage('Hallo');
 end;
 
 {$ENDREGION}
