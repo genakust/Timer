@@ -178,6 +178,7 @@ object frmTimer: TfrmTimer
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'SpeedButton1Style1'
+          OnClick = btnDeleteClick
         end
       end
       object lvTimers: TListView

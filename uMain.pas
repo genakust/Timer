@@ -55,6 +55,7 @@ type
       const AItem: TListViewItem);
     procedure btnAddTimerClick(Sender: TObject);
     procedure actStartTimerExecute(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
   private const
     CFRAME_NAME: string = 'Timer';
   private
@@ -81,7 +82,7 @@ type
     procedure DeleteItems;
     procedure SetupItem(lvTimers: TlistView; Item: TListViewItem; imgChecked,
       imgUnchecked: TBitmap);
-    procedure SelectedCount(LView: TListView);
+    procedure DeleteSelectedItem(LView: TListView);
   public
     { Public-Deklarationen }
   end;
@@ -168,11 +169,11 @@ end;
 {$ENDREGION}
 {$REGION '< ListView/Items >'}
 
-procedure TfrmTimer.SelectedCount(LView: TListView);
+procedure TfrmTimer.DeleteSelectedItem(LView: TListView);
 var
   item:TListViewItem;
 begin
-  item:= LView.Selected;
+  item:= TListViewItem(LView.Selected);
   if Assigned(item) then
   begin
     ShowMessage('You want to delete item with tag: ' + item.TagString);
@@ -273,6 +274,7 @@ procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   SelectItem(AItem);
+  btnDelete.Enabled:= true;
 end;
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
@@ -301,6 +303,10 @@ end;
 
 {$ENDREGION}
 {$REGION '< onClick of Buttons, Labels...'}
+procedure TfrmTimer.btnDeleteClick(Sender: TObject);
+begin
+  DeleteSelectedItem(lvTimers);
+end;
 
 procedure TfrmTimer.btnGoToSettingsOnClick(Sender: TObject);
 begin
@@ -339,6 +345,7 @@ begin
   // go back
   TabControl1.ActiveTab := tabTimer;
 end;
+
 
 function TfrmTimer.GetMediaDir: string;
 begin
