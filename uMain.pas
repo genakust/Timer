@@ -79,6 +79,8 @@ type
     /// <summary>Clear ListViewItems
     /// </summary>
     procedure DeleteItems;
+    procedure SetupItem(lvTimers: TlistView; Item: TListViewItem; imgChecked,
+      imgUnchecked: TBitmap);
   public
     { Public-Deklarationen }
   end;
@@ -165,9 +167,19 @@ end;
 {$ENDREGION}
 {$REGION '< ListView/Items >'}
 
+procedure TfrmTimer.SetupItem(lvTimers: TlistView; Item: TListViewItem;
+  imgChecked, imgUnchecked:TBitmap);
+begin
+  if Item.Checked then
+    TListItemImage(Item.Objects.FindDrawable('imgActive')).Bitmap := imgChecked
+  else
+    TListItemImage(Item.Objects.FindDrawable('imgActive')).Bitmap := imgUnchecked;
+end;
+
 procedure TfrmTimer.SelectItem(Item: TListViewItem);
 begin
-   { TODO : select item procedure }
+   Item.Checked:= not Item.Checked;
+   SetupItem(lvTimers, Item, imgChecked.Bitmap, imgUnchecked.Bitmap);
 end;
 
 procedure TfrmTimer.AddItem(const aTimerNum, aTimerDuration: string;
@@ -247,7 +259,7 @@ end;
 procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
-  TabControl1.ActiveTab := tabSettings;
+  SelectItem(AItem);
 end;
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
