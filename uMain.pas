@@ -81,6 +81,7 @@ type
     procedure DeleteItems;
     procedure SetupItem(lvTimers: TlistView; Item: TListViewItem; imgChecked,
       imgUnchecked: TBitmap);
+    procedure SelectedCount(LView: TListView);
   public
     { Public-Deklarationen }
   end;
@@ -166,6 +167,18 @@ end;
 
 {$ENDREGION}
 {$REGION '< ListView/Items >'}
+
+procedure TfrmTimer.SelectedCount(LView: TListView);
+var
+  item:TListViewItem;
+begin
+  item:= LView.Selected;
+  if Assigned(item) then
+  begin
+    ShowMessage('You want to delete item with tag: ' + item.TagString);
+    LView.Items.Delete(item.Index);
+  end;
+end;
 
 procedure TfrmTimer.SetupItem(lvTimers: TlistView; Item: TListViewItem;
   imgChecked, imgUnchecked:TBitmap);
