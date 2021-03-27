@@ -84,9 +84,9 @@ ExplicitSubNodes=Enabled
 [layComboBox]
 Coordinates=306,372,83,33
 
-[ComboBox1]
-Coordinates=405,372,84,123
-
 [BindingsList1]
 Coordinates=424,1,82,33
+
+[cbSetTime]
+Coordinates=405,372,84,123
 

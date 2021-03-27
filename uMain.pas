@@ -10,8 +10,8 @@ uses
   FMX.TabControl, System.ImageList, FMX.ImgList, frameTimer, FMX.DateTimeCtrls,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.ListView, Data.Bind.Components, Data.Bind.ObjectScope, System.Actions,
-  FMX.ActnList, FMX.ListBox, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
-  System.Bindings.Outputs, Fmx.Bind.Editors;
+  FMX.ActnList, FMX.ListBox, Data.Bind.EngExt, FMX.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, FMX.Bind.Editors;
 
 type
   TfrmTimer = class(TForm)
@@ -40,7 +40,7 @@ type
     recImage: TRoundRect;
     imgChecked: TImage;
     imgUnchecked: TImage;
-    ComboBox1: TComboBox;
+    cbSetTime: TComboBox;
     layComboBox: TLayout;
     BindingsList1: TBindingsList;
     procedure FormCreate(Sender: TObject);
@@ -51,11 +51,11 @@ type
     procedure btnSetiingsBackClick(Sender: TObject);
     procedure btnGoToSettingsOnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure lvTimersItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
     procedure btnAddTimerClick(Sender: TObject);
     procedure actStartTimerExecute(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
+    procedure lvTimersItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
   private const
     CFRAME_NAME: string = 'Timer';
   private
@@ -63,7 +63,7 @@ type
     /// <summary>
     /// Memory for the remaining time
     /// </summary>
-    FCount: integer;
+    FCount: Integer;
     procedure OnTimer1(Sender: TObject);
     procedure PlaySound;
     procedure CreateAndAddTimerFrame(aFrameName: string);
@@ -75,13 +75,13 @@ type
     /// Add single item to ListView
     /// </summary>
     procedure AddItem(const aTimerNum, aTimerDuration: string;
-      aIsActive: integer);
+      aIsActive: Integer);
     procedure SelectItem(Item: TListViewItem);
     /// <summary>Clear ListViewItems
     /// </summary>
     procedure DeleteItems;
-    procedure SetupItem(lvTimers: TlistView; Item: TListViewItem; imgChecked,
-      imgUnchecked: TBitmap);
+    procedure SetupItem(lvTimers: TListView; Item: TListViewItem;
+      imgChecked, imgUnchecked: TBitmap);
     procedure DeleteSelectedItem(LView: TListView);
   public
     { Public-Deklarationen }
@@ -129,7 +129,7 @@ begin
   imgChecked.Visible := false;
   imgUnchecked.Visible := false;
 
-  btnDelete.Enabled:= false;
+  btnDelete.Enabled := false;
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
@@ -147,7 +147,7 @@ end;
 
 procedure TfrmTimer.OnTimer1(Sender: TObject);
 var
-  min: integer;
+  min: Integer;
   sec: extended;
   temp: double;
 begin
@@ -171,33 +171,34 @@ end;
 
 procedure TfrmTimer.DeleteSelectedItem(LView: TListView);
 var
-  item:TListViewItem;
+  Item: TListViewItem;
 begin
-  item:= TListViewItem(LView.Selected);
-  if Assigned(item) then
+  Item := TListViewItem(LView.Selected);
+  if Assigned(Item) then
   begin
-    ShowMessage('You want to delete item with tag: ' + item.TagString);
-    LView.Items.Delete(item.Index);
+    ShowMessage('You want to delete item with tag: ' + Item.TagString);
+    LView.Items.Delete(Item.Index);
   end;
 end;
 
-procedure TfrmTimer.SetupItem(lvTimers: TlistView; Item: TListViewItem;
-  imgChecked, imgUnchecked:TBitmap);
+procedure TfrmTimer.SetupItem(lvTimers: TListView; Item: TListViewItem;
+  imgChecked, imgUnchecked: TBitmap);
 begin
   if Item.Checked then
     TListItemImage(Item.Objects.FindDrawable('imgActive')).Bitmap := imgChecked
   else
-    TListItemImage(Item.Objects.FindDrawable('imgActive')).Bitmap := imgUnchecked;
+    TListItemImage(Item.Objects.FindDrawable('imgActive')).Bitmap :=
+      imgUnchecked;
 end;
 
 procedure TfrmTimer.SelectItem(Item: TListViewItem);
 begin
-   Item.Checked:= not Item.Checked;
-   SetupItem(lvTimers, Item, imgChecked.Bitmap, imgUnchecked.Bitmap);
+  Item.Checked := not Item.Checked;
+  SetupItem(lvTimers, Item, imgChecked.Bitmap, imgUnchecked.Bitmap);
 end;
 
 procedure TfrmTimer.AddItem(const aTimerNum, aTimerDuration: string;
-  aIsActive: integer);
+  aIsActive: Integer);
 begin
   { TODO : insert code from below }
 end;
@@ -209,7 +210,7 @@ var
   ItemToAdd: TListViewItem;
   query: TFDQuery;
   timeText: string;
-  number: integer;
+  number: Integer;
 begin
   query := DataModule1.qrySelectAll;
   query.Close;
@@ -270,12 +271,34 @@ begin
   end;
 end;
 
-procedure TfrmTimer.lvTimersItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TfrmTimer.lvTimersItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+var
+  item: TListViewItem;
+  duration: string;
 begin
-  SelectItem(AItem);
-  btnDelete.Enabled:= true;
+  item:= lvTimers.Items[ItemIndex];
+  if not Assigned(item) then
+    Exit;
+  // Accessory was hited
+  if ItemObject is TListItemAccessory then
+  begin
+    // get time as string
+    duration:= item.Objects.FindDrawable('TimerDuration').Data.ToString;
+    // set actual time as default value
+    cbSetTime.Index:= cbSetTime.Items.IndexOf('[10 Minutes]');
+    // go to the settings tab
+    TabControl1.ActiveTab := tabSettings;
+  end
+  else
+  begin
+    SelectItem(item);
+    // Enable the delete button
+    btnDelete.Enabled := Assigned(lvTimers.Selected);
+  end;
 end;
+
 {$ENDREGION}
 {$REGION '< Mediaplayer >'}
 
@@ -303,6 +326,7 @@ end;
 
 {$ENDREGION}
 {$REGION '< onClick of Buttons, Labels...'}
+
 procedure TfrmTimer.btnDeleteClick(Sender: TObject);
 begin
   DeleteSelectedItem(lvTimers);
@@ -345,7 +369,6 @@ begin
   // go back
   TabControl1.ActiveTab := tabTimer;
 end;
-
 
 function TfrmTimer.GetMediaDir: string;
 begin
