@@ -287,7 +287,7 @@ begin
     // get time as string
     duration:= item.Objects.FindDrawable('TimerDuration').Data.ToString;
     // set actual time as default value
-    cbSetTime.Index:= cbSetTime.Items.IndexOf('[10 Minutes]');
+    cbSetTime.ItemIndex:= cbSetTime.Items.IndexOf('10 Minutes');
     // go to the settings tab
     TabControl1.ActiveTab := tabSettings;
   end
