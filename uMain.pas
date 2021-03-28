@@ -227,13 +227,12 @@ begin
         begin
           // add a new item to list
           ItemToAdd := lvTimers.Items.Add;
-          // Timer name
-          ItemToAdd.Data['TimerName'] := timerName + number.ToString;
           // for item identification, like tag-property
           ItemToAdd.TagString := number.ToString;
           // duration
-          timeText := query.FieldByName('Minutes').AsString + ' min ' +
-            query.FieldByName('Seconds').AsString + ' sec';
+          timeText := query.FieldByName('Hours').AsString + ':' +
+                        query.FieldByName('Minutes').AsString + ':' +
+                        query.FieldByName('Seconds').AsString;
           ItemToAdd.Data['TimerDuration'] := timeText;
           // set if timer is active
           if query.FieldByName('IsActive').AsInteger = 1 then

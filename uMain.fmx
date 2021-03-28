@@ -23,7 +23,7 @@ object frmTimer: TfrmTimer
     Size.Height = 610.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     TabPosition = None
     Sizes = (
@@ -129,7 +129,7 @@ object frmTimer: TfrmTimer
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -194,21 +194,13 @@ object frmTimer: TfrmTimer
         ItemAppearance.ItemHeight = 80
         ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
           item
-            AppearanceObjectName = 'TimerName'
-            AppearanceClassName = 'TTextObjectAppearance'
-            Appearance.Font.Size = 18.000000000000000000
-            Appearance.Width = 305.000000000000000000
-            Appearance.Height = 40.000000000000000000
-            Appearance.PlaceOffset.X = 70.000000000000000000
-          end
-          item
             AppearanceObjectName = 'TimerDuration'
             AppearanceClassName = 'TTextObjectAppearance'
-            Appearance.Font.Size = 14.000000000000000000
-            Appearance.Width = 305.000000000000000000
-            Appearance.Height = 40.000000000000000000
-            Appearance.PlaceOffset.X = 70.000000000000000000
-            Appearance.PlaceOffset.Y = 40.000000000000000000
+            Appearance.Font.Size = 18.000000000000000000
+            Appearance.Width = 338.000000000000000000
+            Appearance.Height = 80.000000000000000000
+            Appearance.Align = Center
+            Appearance.PlaceOffset.X = 4.000000000000000000
           end
           item
             AppearanceObjectName = 'Accessory3'
@@ -299,7 +291,7 @@ object frmTimer: TfrmTimer
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
