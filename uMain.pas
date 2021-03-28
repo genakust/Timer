@@ -66,7 +66,6 @@ type
     FCount: Integer;
     procedure OnTimer1(Sender: TObject);
     procedure PlaySound;
-    procedure CreateAndAddTimerFrame(aFrameName: string);
     /// <summary>
     /// load data from database and set timer parameters
     /// </summary>
@@ -96,25 +95,7 @@ uses
   uConstants, System.iOUtils, uDM, FireDAC.Comp.Client;
 
 {$R *.fmx}
-{$REGION '< Frames >'}
 
-procedure TfrmTimer.CreateAndAddTimerFrame(aFrameName: string);
-var
-  FFrameSingleTimer1: TFrameSingleTimerData;
-begin
-  FFrameSingleTimer1 := TFrameSingleTimerData.Create(nil);
-  FFrameSingleTimer1.Name := aFrameName;
-  FFrameSingleTimer1.Width := lvTimers.Width;
-  FFrameSingleTimer1.OnButtonClick := btnGoToSettingsOnClick;
-  lvTimers.BeginUpdate;
-  try
-    lvTimers.AddObject(FFrameSingleTimer1);
-  finally
-    lvTimers.EndUpdate;
-  end;
-end;
-
-{$ENDREGION}
 {$REGION '< Form Create and Co >'}
 
 procedure TfrmTimer.FormCreate(Sender: TObject);
