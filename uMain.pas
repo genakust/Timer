@@ -111,6 +111,8 @@ begin
   imgUnchecked.Visible := false;
 
   btnDelete.Enabled := false;
+
+  lvTimers.DeleteButtonText:= 'Delete';
 end;
 
 procedure TfrmTimer.FormDestroy(Sender: TObject);
