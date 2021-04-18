@@ -111,7 +111,7 @@ begin
   imgUnchecked.Visible := false;
 
   btnDelete.Enabled := false;
-
+  // set text for deleting item
   lvTimers.DeleteButtonText:= 'Delete';
 end;
 

@@ -927,8 +927,8 @@ object frmTimer: TfrmTimer
             SourceRect.Bottom = 36.000000000000000000
           end>
       end>
-    Left = 400
-    Top = 536
+    Left = 448
+    Top = 472
   end
   object ActionList1: TActionList
     Left = 392
