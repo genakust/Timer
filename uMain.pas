@@ -34,7 +34,6 @@ type
     ActionList1: TActionList;
     actCloseSettings: TAction;
     actOpenSettings: TAction;
-    Layout2: TLayout;
     imgClose: TImage;
     actStartStop: TAction;
     Timer: TTimer;
