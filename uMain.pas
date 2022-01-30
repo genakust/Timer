@@ -8,6 +8,11 @@ uses
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.ListBox,
   System.Actions, FMX.ActnList, FMX.Media, System.IOUtils,
 
+  {$IFDEF ANDROID}
+  FMX.Helpers.Android, Androidapi.Helpers, Androidapi.JNI.GraphicsContentViewText,
+  Androidapi.JNI.App,
+  {$ENDIF}
+
   uTimerData, uCommonTools;
 
 type
@@ -54,7 +59,9 @@ type
     procedure PlaySound;
     function GetMediaDir: string;
     procedure TimerStartStop(const AStart: boolean);
-    { Private-Deklarationen }
+    {$IFDEF ANDROID}
+    procedure KeepAndroidScreenOn(const AStart: boolean);
+    {$ENDIF}
   public
     { Public-Deklarationen }
   end;
@@ -109,6 +116,9 @@ begin
   end;
 
   TimerStartStop(FStart);
+  {$IFDEF ANDROID}
+  KeepAndroidScreenOn(FStart);
+  {$ENDIF}
 end;
 
 {$endregion}
@@ -145,6 +155,20 @@ begin
   actOpenSettingsExecute(nil);
 end;
 
+{$REGION '< Platform dependent functions >'}
+{$IFDEF ANDROID}
+procedure TForm1.KeepAndroidScreenOn(const AStart: boolean);
+begin
+  if AStart then
+    TAndroidHelper.Activity.getWindow.addFlags(
+      TJWindowManager_LayoutParams.JavaClass.FLAG_KEEP_SCREEN_ON)
+  else
+    TAndroidHelper.Activity.getWindow.clearFlags(
+      TJWindowManager_LayoutParams.JavaClass.FLAG_KEEP_SCREEN_ON);
+end;
+{$ENDIF}
+{$endregion}
+
 {$REGION '< Timer >'}
 procedure TForm1.TimerTimer(Sender: TObject);
 var
@@ -156,9 +180,11 @@ begin
     FRemainingSec := FRemainingSec - 1
   else
   begin
-    Timer.Enabled := false;
+    TimerStartStop(False);
     imgStartStop.Bitmap := imgImageStart.Bitmap;
     PlaySound();
+    FStart := false;
+    Exit;
   end;
 
   temp := FRemainingSec / 60;
